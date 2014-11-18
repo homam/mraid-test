@@ -1,0 +1,104 @@
+
+<script src="mraid.js"></script>
+
+<div id="adContainer" style="width:320px;margin:0px;padding:0px;background-color:#ffffff;">
+    <div id="normal" style="display:none;width:320px;height:50px;margin:auto;position:relative;top:0px;left:0px;">
+        <img width="320" height="50" src="http://mymplx.com/MRAID/MRAID_AD_EXAMPLES/MRAID_expandable/320x50_click_to_expand.png" onclick="javascript:expand();" />
+    </div>
+
+    <div id="expanded" style="display:none;width:320px;height:250px;margin:auto;position:relative;top:0px;left:0px;">
+        <img width="320" height="250" style="position:absolute;top:0px;left:0px;" src="http://mymplx.com/MRAID/MRAID_AD_EXAMPLES/MRAID_expandable/320x250_expanded.png" />
+        <img width="38" height="38" style="position:absolute;top:5px;right:5px;" src="http://mymplx.com/MRAID/MRAID_AD_EXAMPLES/MRAID_expandable/Close_38x38.png" onclick="javascript:collapse();" />
+        <img width="37" height="37" style="position:absolute;top:125px;left:56px;" src="http://mymplx.com/MRAID/MRAID_AD_EXAMPLES/MRAID_expandable/Html_37x37.png" onclick="javascript:openSite('http://www.conversantmedia.com');" />
+        <img width="37" height="37" style="position:absolute;top:125px;left:113px;" src="http://mymplx.com/MRAID/MRAID_AD_EXAMPLES/MRAID_expandable/Location_37x37.png" onclick="javascript:openSite('https://maps.google.com/maps?q=160+Spear+St,+San+Francisco,+CA&hl=en&oq=1875+S&hnear=160+Spear+St,+San+Francisco,+California+94105&t=m&z=17&iwloc=A')" />
+        <img width="37" height="37" style="position:absolute;top:125px;left:170px;" src="http://mymplx.com/MRAID/MRAID_AD_EXAMPLES/MRAID_expandable/Video_37x37.png" onclick="javascript:openSite('http://mymplx.com/MRAID/MRAID_AD_EXAMPLES/MRAID_expandable/demo-video.mp4');" />
+        <img width="37" height="37" style="position:absolute;top:125px;left:227px;" src="http://mymplx.com/MRAID/MRAID_AD_EXAMPLES/MRAID_expandable/ClickTAG_37x37.png" onclick="javascript:openSite('http://www.conversantmedia.com');" />
+    </div>
+</div>
+
+<style type="text/css">
+    body {
+        background-color: #000;
+    }
+</style>
+
+<script>
+    function collapse() {
+        mraid.close();
+    }
+
+    function mraidIsReady() {
+        mraid.removeEventListener("ready", mraidIsReady);
+
+        showMyAd();
+    }
+
+    function showMyAd() {
+        var el = document.getElementById("normal");
+        el.style.display = '';
+
+        mraid.addEventListener("stateChange", updateAd);
+    }
+
+    function expand() {
+        mraid.setExpandProperties({
+            "width": 320,
+            "height": 250,
+            "useCustomClose": true
+        });
+        mraid.expand();
+    }
+
+    function openSite(url) {
+        mraid.open(url);
+    }
+
+    function updateAd(state) {
+        if (state == "expanded") {
+            toggleLayer('normal', 'expanded');
+        } else if (state == "default") {
+            toggleLayer('expanded', 'normal');
+        }
+    }
+
+    function toggleLayer(fromLayer, toLayer) {
+        var fromElem = document.getElementById(fromLayer);
+        fromElem.style.display = 'none';
+
+        var toElem = document.getElementById(toLayer);
+        toElem.style.display = '';
+    }
+
+    window.addEventListener("orientationchange", function () {
+        if (mraid.getState() == "expanded") {
+            collapse();
+        }
+    });
+
+    function setupViewport(width) {
+        var element = document.querySelector("meta[name=viewport]");
+        if (!element) {
+            element = document.createElement("meta");
+            element.name = "viewport";
+            element.content = "width=" + width + ", user-scalable=no";
+            document.getElementsByTagName('head')[0].appendChild(element);
+        } else {
+            element.content = "width=" + width + ", user-scalable=no";
+        }
+    }
+    setupViewport(320);
+
+    function doReadyCheck() {
+        if (typeof(mraid)==="undefined") {
+            setTimeout(doReadyCheck, 250);
+        } else {
+            if (mraid.getState() == 'loading') {
+                mraid.addEventListener("ready", mraidIsReady);
+            } else {
+                showMyAd();
+            }
+        }
+    }
+
+    doReadyCheck();
+</script>
