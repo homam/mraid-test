@@ -1,5 +1,7 @@
 <script src="bridge.js"></script>
 <div id="adHtml">
+
+<!-- tag here -->
 <script src="mraid.js"></script>
 <div class="celtra-ad-v3">
     <img src="data:image/png,celtra" style="display: none" onerror="
@@ -8,7 +10,7 @@
             var req = document.createElement('script');
             req.id = params.scriptId = 'celtra-script-' + (window.celtraScriptIndex = (window.celtraScriptIndex||0)+1);
             params.clientTimestamp = new Date/1000;
-            var src = (window.location.protocol == 'https:' ? 'https' : 'http') + '://ads.celtra.com/608d7456/mraid-ad.js?';
+            var src = (window.location.protocol == 'https:' ? 'https' : 'http') + '://ads.celtra.com/c0e4eff3/mraid-ad.js?';
             for (var k in params) {
                 src += '&amp;' + encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
             }
@@ -17,6 +19,8 @@
         })(this);
     "/>
 </div>
+<!-- end tag -->
+
 </div>
 
 <script>
