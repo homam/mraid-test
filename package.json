@@ -1,0 +1,17 @@
+{
+  "name": "MobitransAdvertiser",
+  "version": "0.0.0",
+  "description": "Mobitrans Advertiser made for mraid",
+  "private":true,
+  "scripts": {
+    "start": "node main.js"
+  },
+  "dependencies": {
+    "express": "*",
+    "cheerio": "*",
+    "request": "*"
+  },
+  "devDependencies": {
+  },
+  "main":"main.js"
+}
