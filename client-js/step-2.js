@@ -12,7 +12,7 @@
                 mobiads.onload = function() {
                     window.mobiads.ads[payloadUrl](script);
                 };
-                s document.currentScript.parentNode.insertBefore(payload, script.nextSibling);
+                document.currentScript.parentNode.insertBefore(payload, script.nextSibling);
 
 
             // Set creative height
