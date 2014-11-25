@@ -47,7 +47,6 @@
              // this._origin = horizontal: left vertical: top
          }
 
-
          function DivPlacement() {
              Placement.apply(this, arguments)
          }
@@ -537,7 +536,7 @@
                  }
              }
              return e
-         };;
+         };
 
          function MRAIDAdapter() {
              InAppAdapter.apply(this, arguments),
