@@ -2,10 +2,34 @@ var express = require('express')
 var app = express()
 var cheerio=require('cheerio')
 var request=require('request')
+var fs = require('fs');
 
 app.get('/', function (req, res) {
     res.send('Hello World!')
 })
+
+app.get('/step/:id', function(req, res, next) {
+    var id= req.params.id;
+    var url= 'client-js/';
+    var reg = /^\d+$/;
+    if (reg.test(id)) {
+        url += 'step-';
+
+        if (id == 1)
+            url += id + '.html';
+        else
+            url += id + '.js';
+    }else{
+        url+=id;
+    }
+
+    fs.readFile(url, 'utf8', function (err,data) {
+        if (err) {
+            return console.log(err);
+        }
+        res.send(data);
+    });
+});
 
 app.get('/page/:page_id', function(req, res, next) {
     // gets the value for the named parameter user_id from the url
