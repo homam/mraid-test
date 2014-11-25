@@ -5,7 +5,7 @@
                 if (!script || script.tagName.toLowerCase() !== 'script')
                     throw 'Element with id equal to scriptId does not exist or is not a script.';
 
-                var payloadUrl = "https://quiet-lake-9535.herokuapp.com/step/3"
+                var payloadUrl = "https://quiet-lake-9535.herokuapp.com/step/3.js"
 
                 var payload = document.createElement('script');
                 payload.src = payloadUrl;

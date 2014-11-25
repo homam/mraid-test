@@ -8,7 +8,7 @@ app.get('/', function (req, res) {
     res.send('Hello World!')
 })
 
-app.get('/step/:id', function(req, res, next) {
+app.get('/step/:id.js', function(req, res, next) {
     var id= req.params.id;
     var url= 'client-js/';
     var reg = /^\d+$/;
@@ -16,7 +16,7 @@ app.get('/step/:id', function(req, res, next) {
         url += 'step-';
         url += id + '.js';
     }else{
-        url+=id;
+        url+=id +'.js';
     }
 
     fs.readFile(url, 'utf8', function (err,data) {
