@@ -1,0 +1,20 @@
+<script src="mraid.js"></script>
+
+<!-- tag starts -->
+<div>
+    <img src="data:image/png,celtra" style="display: none" onerror="
+        (function(self) {
+            var params = {placementId: 'homam'};
+            var req = document.createElement('script');
+            req.id = params.scriptId = 'mone-tag-script-' + (window.moneTagScriptIndex = (window.moneTagScriptIndex||0)+1);
+            params.clientTimestamp = new Date();
+            var src = (window.location.protocol == 'https:' ? 'https' : 'http') + '://localhost:8080/homam/step-2.js?';
+            for (var k in params) {
+                src += '&amp;' + encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+            }
+            req.src = src;
+            self.parentNode.insertBefore(req, self.nextSibling);
+        })(this);
+    " />
+</div>
+<!-- tag ends -->
