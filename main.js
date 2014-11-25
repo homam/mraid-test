@@ -14,11 +14,7 @@ app.get('/step/:id', function(req, res, next) {
     var reg = /^\d+$/;
     if (reg.test(id)) {
         url += 'step-';
-
-        if (id == 1)
-            url += id + '.html';
-        else
-            url += id + '.js';
+        url += id + '.js';
     }else{
         url+=id;
     }
