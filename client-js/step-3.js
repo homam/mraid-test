@@ -2,12 +2,27 @@
     ///payload URL
 
     var mobiad =  function(script, runtimeParams) {
-        if (mraid.getState() === 'loading') {
-            console.log("MRAID Ad: adding event listener for ready");
-            mraid.addEventListener('ready', showAd);
+
+        if ((mraid.getState() != "default") || (mraid.getState() != "ready")) {
+            // console.log("Document is not ready, adding event listener");
+            mraid.addEventListener("stateChange", handleStateChanges);
         } else {
-            showAd();
+            mraid.addEventListener("stateChange", handleStateChanges);
         }
+
+        function handleStateChanges() {
+
+            switch(mraid.getState()) {
+                case "expanded":
+                    showAd();
+                    break;
+                case "default":
+                    showAd();
+                    break;
+            }
+        }
+
+
 
 
         function showAd() {
