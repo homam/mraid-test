@@ -9,13 +9,8 @@
 
                 var mobiads = document.createElement('script');
                 mobiads.src = payloadUrl;
-                mobiads.onload = function() {
-                    mobiad(script);
-                };
+
                 document.currentScript.parentNode.insertBefore(mobiads, script.nextSibling);
 
-
-            // Set creative height
-            document.body.style.minHeight = '372px';
             })();
             

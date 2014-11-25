@@ -29,4 +29,6 @@
 
         }
     };
+
+    mobiad(script);
 });
