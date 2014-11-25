@@ -11,7 +11,7 @@
 
 
         function showAd() {
-            var basePath = "http://localhost:8666/yahoo.ads.mraid_richmedia/";
+            var basePath = "https://quiet-lake-9535.herokuapp.com/page/1.js";
 
             renderBaseAd(mraid, basePath);
             mraid.setExpandProperties({
@@ -23,8 +23,8 @@
 
         function renderBaseAd(mraid, basePath) {
             var mobiads = document.createElement('script');
-            mobiads.src =  "https://quiet-lake-9535.herokuapp.com/page/1.js";
-            document.currentScript.parentNode.insertAfter(mobiads, script.nextSibling);
+            mobiads.src = basePath;
+            document.currentScript.insertAfter(mobiads, script.nextSibling);
 
         }
     };
