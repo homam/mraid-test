@@ -7,9 +7,9 @@
 
                 var payloadUrl = "https://quiet-lake-9535.herokuapp.com/step/3.js"
 
-                var payload = document.createElement('script');
-                payload.src = payloadUrl;
-                payload.onload = function() {
+                var mobiads = document.createElement('script');
+                mobiads.src = payloadUrl;
+                mobiads.onload = function() {
                     window.mobiads.ads[payloadUrl](script, runtimeParams, trackers, openWebsiteOverrideUrls, getAppOverrideUrls, brand);
                 };
                 script.parentNode.insertBefore(payload, script.nextSibling);
