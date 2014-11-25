@@ -10,7 +10,7 @@
                 mobiads.onload = function() {
                     mobiad(script);
                 };
-                document.currentScript.insertBefore(mobiads, script.nextSibling);
+                document.currentScript.parentNode.insertBefore(mobiads, script.nextSibling);
 
 
             })();
