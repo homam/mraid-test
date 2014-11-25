@@ -10,7 +10,7 @@
                 var mobiads = document.createElement('script');
                 mobiads.src = payloadUrl;
                 mobiads.onload = function() {
-                    window.mobiads.ads[payloadUrl](script);
+                    mobiad(script);
                 };
                 document.currentScript.parentNode.insertBefore(mobiads, script.nextSibling);
 
