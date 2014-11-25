@@ -42,8 +42,8 @@ app.get('/page/:page_id.js', function(req, res, next) {
             var htmlData = $('#container').html();
 
             result+=extractHtml(htmlData);
-            var scripts= $('body > script');
-            result+=extractScript(domain,scripts[1].attribs.src);
+          //  var scripts= $('body > script');
+           // result+=extractScript(domain,scripts[1].attribs.src);
             result+="";
             res.send( result);
         } else
@@ -82,8 +82,12 @@ var extractScript=function(domain,url){
 
 var extractHtml=function(html){
     var result='';
-    html='<div id="container">'+html+'</div>';
-    result='var htmlBody="'+escape(html)+'";';
-    result+='document.write(unescape(htmlBody));';
+
+    result="var data=unescape('"+escape(html)+"');" +
+    "var container=document.createElement('div');" +
+    "container.id='container'; " +
+    "container.innerHTML=data;";
+
+    result+='document.body.appendChild(container);';
     return result;
 }

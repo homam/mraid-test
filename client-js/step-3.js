@@ -11,11 +11,11 @@
 
 
         function showAd() {
-            var basePath = "https://quiet-lake-9535.herokuapp.com/page/1.js";
+            var basePath = "http://localhost:3000/page/1.js";
 
             renderBaseAd(mraid, basePath);
             mraid.setExpandProperties({
-                useCustomClose : true
+            //    useCustomClose : true
             });
         };
 
@@ -25,8 +25,8 @@
             console.log("MRAID Ad: renderBaseAd");
             var mobiads = document.createElement('script');
             mobiads.src = basePath;
-            var element= document.getElementById('mobitrans-ad-1');
-            element.parentNode.insertAfter(mobiads);
+            var element= document.getElementById("mobitrans-ad-1");
+            document.body.appendChild(mobiads);
 
         }
     };
