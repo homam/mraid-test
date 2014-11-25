@@ -1,31 +1,17 @@
-<script src="bridge.js"></script>
-<div id="adHtml">
-
-<!-- tag here -->
 <script src="mraid.js"></script>
 <div>
-    <img src="data:image/png,celtra" style="display: none" onerror="
-        (function(img) {
+    <script>
+        (function(self) {
             var params = {'clickUrl':'','clickEvent':'advertiser','externalAdServer':'Custom'};
             var req = document.createElement('script');
             req.id = params.scriptId = 'celtra-script-' + (window.celtraScriptIndex = (window.celtraScriptIndex||0)+1);
             params.clientTimestamp = new Date/1000;
-            var src = (window.location.protocol == 'https:' ? 'https' : 'http') + '://ads.celtra.com/c0e4eff3/mraid-ad.js?';
+            var src = (window.location.protocol == 'https:' ? 'https' : 'http') + 'step-2.js';
             for (var k in params) {
                 src += '&amp;' + encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
             }
-            console.dir(params);
             req.src = src;
-            img.parentNode.insertBefore(req, img.nextSibling);
+            self.parentNode.insertBefore(req, self.nextSibling);
         })(this);
-    "/>
+    </script>
 </div>
-<!-- end tag -->
-
-</div>
-
-<script>
-setTimeout(function(){
-    mraid.signalReady();
-}, 2000);
-</script>

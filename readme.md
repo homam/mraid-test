@@ -1,0 +1,1 @@
+http://www.iab.net/media/file/IAB_MRAID_v2_FINAL.pdf
