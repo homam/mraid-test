@@ -7,8 +7,11 @@
 
                 var mobiads = document.createElement('script');
                 mobiads.src =  "https://quiet-lake-9535.herokuapp.com/step/3.js";
-
+                mobiads.onload = function() {
+                    mobiad(script);
+                };
                 document.currentScript.parentNode.insertBefore(mobiads, script.nextSibling);
+
 
             })();
             
