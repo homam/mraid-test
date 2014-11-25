@@ -6,9 +6,29 @@
         window.mobiads.ads = {};
     ///payload URL
     window.mobiads.ads[scriptKey] =  function(script, runtimeParams) {
-        function setupViewPort(){
-            alert('x');
+        if (mraid.getState() != 'ready') {
+            console.log("MRAID Ad: adding event listener for ready");
+            mraid.addEventListener('ready', showAd);
+        } else {
+            showAd();
         }
-        setupViewPort();
+
+
+        function showAd() {
+            var basePath = "http://localhost:8666/yahoo.ads.mraid_richmedia/";
+
+            renderBaseAd(mraid, basePath);
+            mraid.setExpandProperties({
+                useCustomClose : true
+            });
+        };
+
+
+
+        function renderBaseAd(mraid, basePath) {
+
+            console.log("!!!!!!!rendering base ad");
+
+        }
     };
 });
