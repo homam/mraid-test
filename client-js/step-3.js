@@ -15,7 +15,7 @@
 
             renderBaseAd(mraid, basePath);
             mraid.setExpandProperties({
-            //    useCustomClose : true
+                useCustomClose : true
             });
         };
 
