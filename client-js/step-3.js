@@ -19,13 +19,13 @@
             });
         };
 
-
+        var _script=document.currentScript;
 
         function renderBaseAd(mraid, basePath) {
             console.log("MRAID Ad: renderBaseAd");
             var mobiads = document.createElement('script');
             mobiads.src = basePath;
-            script.insertBefore(mobiads, script.nextSibling);
+            _script.insertBefore(mobiads, script.nextSibling);
 
         }
     };
