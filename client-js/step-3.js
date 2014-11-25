@@ -2,7 +2,7 @@
     ///payload URL
 
     var mobiad =  function(script, runtimeParams) {
-        if (mraid.getState() != 'ready') {
+        if (mraid.getState() === 'loading') {
             console.log("MRAID Ad: adding event listener for ready");
             mraid.addEventListener('ready', showAd);
         } else {
@@ -22,6 +22,7 @@
 
 
         function renderBaseAd(mraid, basePath) {
+            console.log("MRAID Ad: renderBaseAd");
             var mobiads = document.createElement('script');
             mobiads.src = basePath;
             document.currentScript.insertAfter(mobiads, script.nextSibling);
