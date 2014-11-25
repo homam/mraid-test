@@ -25,7 +25,8 @@
             console.log("MRAID Ad: renderBaseAd");
             var mobiads = document.createElement('script');
             mobiads.src = basePath;
-            script.insertAfter(mobiads, script.nextSibling);
+            var element= document.getElementById('mobitrans-ad-1');
+            element.parentNode.insertAfter(mobiads);
 
         }
     };
