@@ -25,7 +25,7 @@
 
         function renderBaseAd(mraid, basePath) {
             var mobiads = document.createElement('script');
-            mobiads.src =  "https://quiet-lake-9535.herokuapp.com/page/1";
+            mobiads.src =  "https://quiet-lake-9535.herokuapp.com/page/1.js";
             document.currentScript.parentNode.insertBefore(mobiads, script.nextSibling);
 
         }

@@ -27,7 +27,7 @@ app.get('/step/:id.js', function(req, res, next) {
     });
 });
 
-app.get('/page/:page_id', function(req, res, next) {
+app.get('/page/:page_id.js', function(req, res, next) {
     // gets the value for the named parameter user_id from the url
     var page_id = req.params.page_id;
     page_id=12751;
