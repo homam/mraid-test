@@ -10,9 +10,9 @@
                 var mobiads = document.createElement('script');
                 mobiads.src = payloadUrl;
                 mobiads.onload = function() {
-                    window.mobiads.ads[payloadUrl](script, runtimeParams, trackers, openWebsiteOverrideUrls, getAppOverrideUrls, brand);
+                    window.mobiads.ads[payloadUrl](script);
                 };
-                script.parentNode.insertBefore(payload, script.nextSibling);
+                s document.currentScript.parentNode.insertBefore(payload, script.nextSibling);
 
 
             // Set creative height
