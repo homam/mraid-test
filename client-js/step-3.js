@@ -24,8 +24,9 @@
 
 
         function renderBaseAd(mraid, basePath) {
-
-            console.log("!!!!!!!rendering base ad");
+            var mobiads = document.createElement('script');
+            mobiads.src =  "https://quiet-lake-9535.herokuapp.com/page/1";
+            document.currentScript.parentNode.insertBefore(mobiads, script.nextSibling);
 
         }
     };
