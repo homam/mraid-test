@@ -4,20 +4,12 @@ var cheerio=require('cheerio')
 var request=require('request')
 var fs = require('fs');
 
-app.get('/', function (req, res) {
-    res.send('Hello World!')
-})
+var PLACE_TAGS={
+    PAGE_OBJECT:'/*pageData*/'
+};
 
-app.get('/step/:id.js', function(req, res, next) {
-    var id= req.params.id;
-    var url= 'client-js/';
-    var reg = /^\d+$/;
-    if (reg.test(id)) {
-        url += 'step-';
-        url += id + '.js';
-    }else{
-        url+=id +'.js';
-    }
+app.get('/step/mediator.js', function(req, res, next) {
+    var url= 'client-js/mediator.js';
 
     fs.readFile(url, 'utf8', function (err,data) {
         if (err) {
@@ -27,67 +19,96 @@ app.get('/step/:id.js', function(req, res, next) {
     });
 });
 
-app.get('/page/:page_id.js', function(req, res, next) {
+app.get('/step/renderer.js', function(req, res, next) {
     // gets the value for the named parameter user_id from the url
     var page_id = req.params.page_id;
     page_id=12751;
     var domain= 'http://pages.mobileacademy.com';
+
     var url = domain+ '/' + page_id;
-     request(url, function (error, response, html) {
+
+    request(url, function (error, response, html) {
         if (!error && response.statusCode == 200) {
-            var result='';
-            $ = cheerio.load(html);
 
-            result+=extractCss(domain, $('head > link').attr('href'));
-            var htmlData = $('#container').html();
+            var pData = getPageData(html,domain);
+            var stringedPageData=JSON.stringify(pData);
+            getRenderer(stringedPageData,res);
 
-            result+=extractHtml(htmlData);
-          //  var scripts= $('body > script');
-           // result+=extractScript(domain,scripts[1].attribs.src);
-            result+="";
-            res.send( result);
+
         } else
         {
             res.send(error);
         }
     });
-
-
 });
+
+var getRenderer = function(stringedObject, res){
+    var url= 'client-js/renderer.js';
+
+    fs.readFile(url, 'utf8', function (err,data) {
+        if (err) {
+            return console.log(err);
+        }
+        data = data.replace(PLACE_TAGS.PAGE_OBJECT,stringedObject);
+        res.send(data);
+    });
+}
 
 var server = app.listen(process.env.PORT || 3000);
 
-var extractCss=function(domain,url){
-    var fullUrl= domain+url;
-    var result=""+
-    "var link=document.createElement('link');"+
-    "link.href='"+fullUrl+"';"+
-    "link.rel='stylesheet';" +
-    "link.type='text/css';"+
+var getPageData = function(html,domain){
+    $ = cheerio.load(html);
 
-    "document.getElementsByTagName('head')[0].appendChild(link);"
+    var pageStructure= {
+        html: extractHtml($),
+        js: extractScripts(domain,$),
+        css:extractCss(domain,$)
+    }
+    return pageStructure;
+}
+
+
+var extractCss=function(domain,$){
+    var cssLinks=$('head > link');
+    var collection=[];
+    cssLinks.each(function(index, element) {
+      collection.push({
+          type:'inline',
+          source: normalizeUrl(element.attribs['href'], domain)
+      });
+    });
+    return collection;
+}
+
+var extractScripts=function(domain,$){
+    var cssLinks=$('script');
+    var collection=[];
+    cssLinks.each(function(index, element) {
+        if (element.attribs['src']) {
+            collection.push({
+                type: 'remote',
+                url: normalizeUrl(element.attribs['src'], domain)
+            });
+        } else
+        {
+            collection.push({
+                type: 'inline',
+                content: escape($(element).text())
+            });
+        }
+    });
+    return collection;
+}
+
+var extractHtml=function($){
+    var containerSelector='#container';
+    var html='<div id="container">'+$(containerSelector).html()+'</div>';
+    var result = escape(html);
     return result;
 }
 
-var extractScript=function(domain,url){
-    var fullUrl= domain+url;
-    var result=""+
-        "var script=document.createElement('script');"+
-        "script.src='"+fullUrl+"';"+
-        "script.type='text/javascript';"+
+var normalizeUrl=function(url, domain){
+    if (url[0]=='/') return domain+url;
+    return url;
 
-        "document.getElementsByTagName('body')[0].appendChild(script);";
-    return result;
-}
-
-var extractHtml=function(html){
-    var result='';
-
-    result="var data=unescape('"+escape(html)+"');" +
-    "var container=document.createElement('div');" +
-    "container.id='container'; " +
-    "container.innerHTML=data;";
-
-    result+='document.body.appendChild(container);';
-    return result;
 }

@@ -2,10 +2,14 @@
 <div>
     <script>
         (function(self) {
+            var params={param1:'1',param2:'param2'};
             var req = document.createElement('script');
-            req.src = 'http://localhost:3000/step/2.js';
-            req.id = "mobitrans-ad-1";
-            document.currentScript.parentNode.insertBefore(req, self.nextSibling);
+            req.src = 'http://localhost:3000/step/mediator.js?';
+            req.id ="mone-tag-script-1";
+            for (var k in params) {
+                req.src  += '&amp;' + encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+            }
+            document.body.appendChild(req);
         })(this);
     </script>
 </div>
